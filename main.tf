@@ -66,27 +66,27 @@ data "azurerm_public_ip" "vm_ip" {
 #                       Network Secuirty Group
 ################################################################
 
-resource "azurerm_network_security_group" "az_nsg" {
-  name                = "acceptanceTestSecurityGroup1"
-  location            = azurerm_resource_group.aks_rg.location
-  resource_group_name = azurerm_resource_group.aks_rg.name
+# resource "azurerm_network_security_group" "az_nsg" {
+#   name                = "acceptanceTestSecurityGroup1"
+#   location            = azurerm_resource_group.aks_rg.location
+#   resource_group_name = azurerm_resource_group.aks_rg.name
 
-  security_rule {
-    name                       = "test123"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+#   security_rule {
+#     name                       = "test123"
+#     priority                   = 100
+#     direction                  = "Inbound"
+#     access                     = "Allow"
+#     protocol                   = "Tcp"
+#     source_port_range          = "*"
+#     destination_port_range     = "*"
+#     source_address_prefix      = "*"
+#     destination_address_prefix = "*"
+#   }
 
-  tags = {
-    environment = "Production"
-  }
-}
+#   tags = {
+#     environment = "Production"
+#   }
+# }
 
 
 

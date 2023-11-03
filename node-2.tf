@@ -6,7 +6,7 @@
 #                 Public IP Address 
 ############################################################
 resource "azurerm_public_ip" "node_2_public_ip" {
-  name = "node_2_vm-public-ip"
+  name = var.node_2_public_ip
   location = azurerm_resource_group.aks_rg.location
   resource_group_name = azurerm_resource_group.aks_rg.name
   allocation_method = "Dynamic"
@@ -23,12 +23,12 @@ data "azurerm_public_ip" "node_2_vm_ip" {
 ##############################################################
 
 resource "azurerm_network_interface" "node-2_nic" {
-  name                = "node_2_nic"
+  name                = var.node_2_nic
   location            = azurerm_resource_group.aks_rg.location
   resource_group_name = azurerm_resource_group.aks_rg.name
 
   ip_configuration {
-    name                          = "node-2"
+    name                          = var.nic_ip_name_node_2
     subnet_id                     = azurerm_subnet.main_subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id = azurerm_public_ip.node_2_public_ip.id
@@ -41,13 +41,13 @@ resource "azurerm_network_interface" "node-2_nic" {
 
 
 resource "azurerm_linux_virtual_machine" "node-2" {
-  name                = "BitbucketNode2"
+  name                = var.vm_name_node_2
   resource_group_name = azurerm_resource_group.aks_rg.name
   location            = azurerm_resource_group.aks_rg.location
-  size                = "Standard_D2s_v3"
+  size                = var.vm_types
   disable_password_authentication = false
-  admin_username      = "azure"
-  admin_password = "Password@123!"
+  admin_username      = var.admin_username
+  admin_password = var.admin_password
   network_interface_ids = [
     azurerm_network_interface.node-2_nic.id,
   ]

@@ -1,4 +1,8 @@
 
+############################################################################
+#   Authorization and Authentication 
+############################################################################
+
 variable "client_secret" {
   description = "Azure service principal client secret"
   type        = string

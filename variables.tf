@@ -41,3 +41,20 @@ variable "azurerm_virtual_network_name" {
 }
 
 
+######################################################################
+
+variable "aks_cluster_name" {
+  type = string
+  default = "myakscluster"
+}
+
+variable "node_count" {
+  type = number
+  default = 3
+}
+
+variable "username" {
+  type        = string
+  description = "The admin username for the new cluster."
+  default     = "azureadmin"
+}

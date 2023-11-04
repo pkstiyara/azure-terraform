@@ -14,17 +14,17 @@ output "node-2" {
     value = azurerm_linux_virtual_machine.node-2.public_ip_address  
 }
 
-output "node-3" {
-    description = "Node-3 VM IP"  
-    value = azurerm_linux_virtual_machine.node-3.public_ip_address
-}
+# output "node-3" {
+#     description = "Node-3 VM IP"  
+#     value = azurerm_linux_virtual_machine.node-3.public_ip_address
+# }
 
-output "node-4" {
-    description = "Node-4 VM IP"
-    value = azurerm_linux_virtual_machine.node-4.public_ip_address
-}
+# output "node-4" {
+#     description = "Node-4 VM IP"
+#     value = azurerm_linux_virtual_machine.node-4.public_ip_address
+# }
 
-output "node-5" {
-    description = "Node-5 VM IP"
-    value = azurerm_linux_virtual_machine.node-5.public_ip_address  
-}
+# output "node-5" {
+#     description = "Node-5 VM IP"
+#     value = azurerm_linux_virtual_machine.node-5.public_ip_address  
+# }

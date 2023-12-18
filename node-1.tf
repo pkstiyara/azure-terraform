@@ -44,8 +44,8 @@ resource "azurerm_linux_virtual_machine" "node-1" {
   location            = azurerm_resource_group.aks_rg.location
   size                = "Standard_D2s_v3"
   disable_password_authentication = false
-  admin_username      = "azure"
-  admin_password = "Password@123!"
+  admin_username      = var.admin_username
+  admin_password = var.admin_password
   network_interface_ids = [
     azurerm_network_interface.node-1_nic.id,
   ]
@@ -58,10 +58,10 @@ resource "azurerm_linux_virtual_machine" "node-1" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
-    version   = "latest"
+    publisher = var.source_image_reference_publisher
+    offer     = var.source_image_reference_offer
+    sku       = var.source_image_reference_sku
+    version   = var.source_image_reference_version
   }
 }
 

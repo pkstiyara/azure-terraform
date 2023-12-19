@@ -47,7 +47,7 @@ resource "azurerm_linux_virtual_machine" "node-jenkins" {
   admin_username      = var.admin_username
   admin_password = var.admin_password
   network_interface_ids = [
-    azurerm_network_interface.node_jenkins_nic.id,
+    azurerm_network_interface.node-jenkins_nic.id,
   ]
 
 

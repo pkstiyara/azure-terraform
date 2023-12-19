@@ -1,5 +1,4 @@
 
-
 ############################################################
 #                 Public IP Address 
 ############################################################
@@ -31,6 +30,38 @@ resource "azurerm_network_interface" "node-1_nic" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id = azurerm_public_ip.node_1_public_ip.id
   }
+}
+
+#################################################################
+#               NSG
+#################################################################
+
+# resource "azurerm_network_security_group" "node_1-nsg" {
+#   name = "node_1_nsg"
+#   location = azurerm_resource_group.aks_rg.location
+
+# }
+
+resource "azurerm_network_security_group" "node_1_nsg" {
+  name                = "node_1_nsg"
+  location            = azurerm_resource_group.aks_rg.location
+  resource_group_name = azurerm_resource_group.aks_rg.name
+  security_rule {
+    name                       = "allow_all_traffic"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "node_1_nsg" {
+  subnet_id                 = azurerm_subnet.main_subnet.id
+  network_security_group_id = azurerm_network_security_group.node_1_nsg.id
 }
 
 ##################################################################
@@ -65,4 +96,4 @@ resource "azurerm_linux_virtual_machine" "node-1" {
   }
 }
 
-##########################################################################
+##############################################################

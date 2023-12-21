@@ -35,6 +35,35 @@ resource "azurerm_network_interface" "node-3_nic" {
   }
 }
 
+#################################################################
+#               NSG 
+#################################################################
+resource "azurerm_network_security_group" "node_3_nsg" {
+  name                = "node_3_nsg"
+  location            = azurerm_resource_group.aks_rg.location
+  resource_group_name = azurerm_resource_group.aks_rg.name
+
+  security_rule {
+    name                       = "allow_ssh"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+#################################################################
+#               NSG Association (New NSG)
+#################################################################
+resource "azurerm_network_interface_security_group_association" "node_3_nic_nsg_association" {
+  network_interface_id      = azurerm_network_interface.node-3_nic.id
+  network_security_group_id = azurerm_network_security_group.node_3_nsg.id
+}
+
 ##################################################################
 #                     Virtual Machine
 ##################################################################

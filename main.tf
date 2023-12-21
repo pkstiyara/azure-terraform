@@ -33,34 +33,34 @@ resource "azurerm_subnet" "main_subnet" {
 #                 Network Interface
 ##############################################################
 
-resource "azurerm_network_interface" "vm_nic" {
-  name                = "vm-nic"
-  location            = azurerm_resource_group.aks_rg.location
-  resource_group_name = azurerm_resource_group.aks_rg.name
+# resource "azurerm_network_interface" "vm_nic" {
+#   name                = "vm-nic"
+#   location            = azurerm_resource_group.aks_rg.location
+#   resource_group_name = azurerm_resource_group.aks_rg.name
 
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = azurerm_subnet.main_subnet.id
-    private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.vm_public_ip.id
-  }
-}
+#   ip_configuration {
+#     name                          = "internal"
+#     subnet_id                     = azurerm_subnet.main_subnet.id
+#     private_ip_address_allocation = "Dynamic"
+#     public_ip_address_id = azurerm_public_ip.vm_public_ip.id
+#   }
+# }
 
-############################################################
-#                 Public IP Address 
-############################################################
-resource "azurerm_public_ip" "vm_public_ip" {
-  name = "vm-public-ip"
-  location = azurerm_resource_group.aks_rg.location
-  resource_group_name = azurerm_resource_group.aks_rg.name
-  allocation_method = "Dynamic"
+# ############################################################
+# #                 Public IP Address 
+# ############################################################
+# resource "azurerm_public_ip" "vm_public_ip" {
+#   name = "vm-public-ip"
+#   location = azurerm_resource_group.aks_rg.location
+#   resource_group_name = azurerm_resource_group.aks_rg.name
+#   allocation_method = "Dynamic"
   
-}
+# }
 
-data "azurerm_public_ip" "vm_ip" {
-  name                = azurerm_public_ip.vm_public_ip.name
-  resource_group_name = azurerm_resource_group.aks_rg.name
-}
+# data "azurerm_public_ip" "vm_ip" {
+#   name                = azurerm_public_ip.vm_public_ip.name
+#   resource_group_name = azurerm_resource_group.aks_rg.name
+# }
 
 ################################################################
 #                       Network Secuirty Group

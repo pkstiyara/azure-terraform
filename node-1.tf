@@ -33,21 +33,15 @@ resource "azurerm_network_interface" "node-1_nic" {
 }
 
 #################################################################
-#               NSG
+#               NSG 
 #################################################################
-
-# resource "azurerm_network_security_group" "node_1-nsg" {
-#   name = "node_1_nsg"
-#   location = azurerm_resource_group.aks_rg.location
-
-# }
-
 resource "azurerm_network_security_group" "node_1_nsg" {
   name                = "node_1_nsg"
   location            = azurerm_resource_group.aks_rg.location
   resource_group_name = azurerm_resource_group.aks_rg.name
+
   security_rule {
-    name                       = "allow_all_traffic"
+    name                       = "allow_ssh"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
@@ -59,8 +53,11 @@ resource "azurerm_network_security_group" "node_1_nsg" {
   }
 }
 
-resource "azurerm_subnet_network_security_group_association" "node_1_nsg" {
-  subnet_id                 = azurerm_subnet.main_subnet.id
+#################################################################
+#               NSG Association (New NSG)
+#################################################################
+resource "azurerm_network_interface_security_group_association" "node_1_nic_nsg_association" {
+  network_interface_id      = azurerm_network_interface.node-1_nic.id
   network_security_group_id = azurerm_network_security_group.node_1_nsg.id
 }
 

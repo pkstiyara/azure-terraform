@@ -33,6 +33,34 @@ resource "azurerm_network_interface" "node-jenkins_nic" {
   }
 }
 
+#################################################################
+#               NSG 
+#################################################################
+resource "azurerm_network_security_group" "node_jenkins_nsg" {
+  name                = "node_jenkins_nsg"
+  location            = azurerm_resource_group.aks_rg.location
+  resource_group_name = azurerm_resource_group.aks_rg.name
+
+  security_rule {
+    name                       = "allow_ssh"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+#################################################################
+#               NSG Association (New NSG)
+#################################################################
+resource "azurerm_network_interface_security_group_association" "node_jenkins_nic_nsg_association" {
+  network_interface_id      = azurerm_network_interface.node-jenkins_nic.id
+  network_security_group_id = azurerm_network_security_group.node_jenkins_nsg.id
+}
 ##################################################################
 #                     Virtual Machine
 ##################################################################

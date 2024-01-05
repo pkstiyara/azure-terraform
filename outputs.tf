@@ -25,8 +25,12 @@ output "node_3_public_ip" {
     value = azurerm_linux_virtual_machine.node-3.public_ip_address  
 }
 
-output "node_jenkins_vm_ip" {
-    description = "JENKINS_URL"
-    value = "http://${azurerm_linux_virtual_machine.node-jenkins.public_ip_address}:8080"
-  
+output "node_jenkins_ip" {
+    description = "jenkins_ip"
+    value = azurerm_linux_virtual_machine.node-jenkins.public_ip_address
 }
+
+#output "node_jenkins_vm_ip" {
+#   description = "JENKINS_URL"
+#   value = "http://${azurerm_linux_virtual_machine.node-jenkins.public_ip_address}:8080"
+#}

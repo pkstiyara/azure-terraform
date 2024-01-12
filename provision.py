@@ -61,3 +61,5 @@ print(f"Output from Node 1 at {node_1_ip_output}:\n{outputs_node_1}")
 print(f"Output from Node 2 at {node_2_ip_output}:\n{outputs_node_2}")
 print(f"Output from Node 3 at {node_3_public_ip_output}:\n{outputs_node_3}")
 print(f"Output from Jenkins at {node_jenkins_ip_output}:\n{outputs_jenkins}")
+
+

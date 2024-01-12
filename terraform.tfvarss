@@ -1,0 +1,30 @@
+
+
+ client_secret    = ""
+client_id        = ""
+tenant_id        = ""
+subscription_id  = ""
+
+resource_group_name = "1-6b0e4634-playground-sandbox"
+location = "East US"
+
+azurerm_virtual_network_name = "my_vm_vnet"
+
+#################################################
+# Linux- Boot Image
+
+   source_image_reference_publisher = "RedHat"
+   source_image_reference_offer = "RHEL"
+   source_image_reference_sku = "87-gen2"
+   source_image_reference_version = "latest"
+  
+
+
+
+##################################################
+# admin user and password
+
+admin_username = "azure"
+admin_password = "Password@123"
+
+##################################################### -->

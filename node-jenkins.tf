@@ -91,6 +91,23 @@ resource "azurerm_linux_virtual_machine" "node-jenkins" {
     sku       = var.source_image_reference_sku
     version   = var.source_image_reference_version
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo 'Hello World' > /tmp/hello.txt",
+      "sudo yum update -y",
+      "sudo yum install git -y",
+    ]
+
+    connection {
+      type        = "ssh"
+      host        = azurerm_linux_virtual_machine.node-jenkins.public_ip_address
+      user        = var.admin_username
+      password    = var.admin_password
+      agent       = false
+      
+    }
+  }
 }
 
 ##########################################################################
